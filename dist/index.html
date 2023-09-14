@@ -381,51 +381,16 @@ function initMap() {
             icon: svgMarker
         });
         if (props.content) {
-            let infoWindow = new google.maps.InfoWindow({
-                content: props.content
-            });
+            const infoWindow = new google.maps.InfoWindow({});
             marker.addListener("click", ()=>{
+                infoWindow.close();
+                infoWindow.setContent(props.content);
                 infoWindow.open(map, marker);
             });
         }
     }
-// const koscielna = {lat:  52.415362033785236, lng: 16.90530596908884};
-// const markerKoscielna = new google.maps.Marker({
-//     position: koscielna,
-//     map,
-//     title: "Kościelna 23",
-//     icon: svgMarker,
-// });
-// const stringKoscielna = 'Kościelna 23';
-//     const infoKoscielna = new google.maps.InfoWindow({
-//     content: stringKoscielna
-// });
-// markerKoscielna.addListener("click", () => {
-//    infoKoscielna.open({
-//         anchor: marker,
-//         map,
-//         shouldFocus: false
-//     });
-// });
-// const poznanska = {lat:  52.41335837550068, lng: 16.90495204652914};
-// const markerPoznanska = new google.maps.Marker({
-//     position: poznanska,
-//     map: map,
-//     title: "Poznańska",
-//     icon: svgMarker,
-// });
-// const stringPoznanska = 'Poznańska';
-//     const infoPoznanska = new google.maps.InfoWindow({
-//     content: stringPoznanska
-// });
-// markerPoznanska.addListener("click", () => {
-//     infoPoznanska.open({
-//         anchor: marker,
-//         map: map,
-//         shouldFocus: false
-//     });
-// });
 }
+initMap();
 
 </script>
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtjInvBoOWbm2Ey31el6hao7mUhEFr3LY&callback=initMap"></script>
