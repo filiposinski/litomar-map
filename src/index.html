@@ -4,8 +4,405 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #map {
+            height: 600px;
+            width: 100vw;
+        }
+    </style>
 </head>
 <body>
-    
+    <h3>MAPA PROJEKTÓW</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <!-- <script>
+        (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+          key: "YOUR_API_KEY",
+          v: "weekly",
+          // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+          // Add other bootstrap parameters as needed, using camel case.
+        });
+      </script> -->
+<!-- <script>
+    function initMap(){
+
+    }
+</script> -->
+
+<script>
+    let map
+    function initMap() {
+        const location = {lat: 52.42414875063241,  lng: 16.935305655535146};
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13, 
+                center: location,
+                disableDefaultUI: true,
+                styles: [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.business",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dadada"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#c9c9c9"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  }
+]
+            });
+
+        const svgMarker = {
+            path : "M10.7979 16.495C10.0752 17.5244 9.23307 18.7239 8.25 20.1445C7.26692 18.7239 6.42478 17.5244 5.70207 16.495C4.27007 14.4553 3.30692 13.0834 2.64528 11.9833C2.14493 11.1513 1.87332 10.5619 1.71688 10.0337C1.56385 9.51691 1.5 8.98785 1.5 8.25C1.5 4.52206 4.52206 1.5 8.25 1.5C11.9779 1.5 15 4.52206 15 8.25C15 8.98785 14.9361 9.51691 14.7831 10.0337C14.6267 10.5619 14.3551 11.1513 13.8547 11.9833C13.1931 13.0834 12.2299 14.4553 10.7979 16.495Z",
+                anchor: new google.maps.Point(10,20),
+                strokeWeight: 3,
+                strokeColor: "#000",
+                scale: 2,
+                optimized: true,
+                origin: new google.maps.Point(10,20),
+                
+
+        }
+
+        addMarker(
+            {coords:{lat:  52.415362033785236, lng: 16.90530596908884},
+            title: "Kościelna 23",
+            content: "<h2>Kościelna 23</h2>"}
+        )
+        addMarker(  
+            {coords:{lat:  52.413336873859045, lng: 16.904602242680173},
+            title: "Poznańska 3",
+            content: "<h2>Poznańska 3</h2>"}
+        )
+        addMarker(  
+            {coords:{lat:  52.41334609894111, lng: 16.905091609025668},
+            title: "Poznańska 5",
+            content: "<h2>Poznańska 5</h2>"}
+        )
+        addMarker(  
+            {coords:{lat:  52.40523207571266, lng: 16.923159716134588},
+            title: "Taczaka 5",
+            content: "<h2>Taczaka 5</h2>"}
+        )
+        addMarker(  
+            {coords:{lat:  52.39954549672176,  lng: 16.92030864964539},
+            title: "Wujka",
+            content: "<h2>Wujka</h2>"}
+        )
+        addMarker(  
+            {coords:{lat: 52.430109502880576, lng: 16.95392478682861 },
+            title: "Wilczak 20",
+            content: "<h2>Wilczak 20</h2>"}
+        )
+        addMarker(  
+            {coords:{lat: 52.43004983171269,  lng: 16.95273123755959 },
+            title: "Spalarnia",
+            content: "<h2>Spalarnia</h2>"}
+        )
+        addMarker(  
+            {coords:{lat:  52.4010675341648,  lng: 16.96448211210796 },
+            title: "Malta Office Park",
+            content: "<h2>Malta Office Park</h2>"}
+        )
+        addMarker(  
+            {coords:{lat: 52.3965149383455,  lng: 16.935422726248405  },
+            title: "River Park",
+            content: "<h2>River Park</h2>"}
+        )
+        addMarker(  
+            {coords:{lat:  52.405338953705865, lng: 16.931877541497464 },
+            title: "Kupiec Poznański",
+            content: "<h2>Kupiec Poznański</h2>"}
+        )
+        addMarker(  
+            {coords:{lat:  52.44734574138527, lng: 16.951974668946796},
+            title: "A17",
+            content: "<h2>A17</h2>"}
+        )
+        addMarker(  
+            {coords:{lat:  52.44714030111128, lng: 16.954367704711665  },
+            title: "A18",
+            content: "<h2>A18</h2>"}
+        )
+        addMarker(  
+            {coords:{lat: 52.44517780588796, lng: 16.959642910477346  },
+            title: "Osiedle Jaśminowe",
+            content: "<h2>Osiedle Jaśminowe</h2>"}
+        )
+
+        function addMarker(props){
+            let marker = new google.maps.Marker({
+                position: props.coords,
+                map: map,
+                title: props.title,
+                icon: svgMarker
+            })
+            if(props.content){
+                let infoWindow = new google.maps.InfoWindow({
+                    content: props.content
+                });
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                })
+            }
+            
+        }
+
+        // const koscielna = {lat:  52.415362033785236, lng: 16.90530596908884};
+        // const markerKoscielna = new google.maps.Marker({
+        //     position: koscielna,
+        //     map,
+        //     title: "Kościelna 23",
+        //     icon: svgMarker,
+          
+        // });
+
+        // const stringKoscielna = 'Kościelna 23';
+        //     const infoKoscielna = new google.maps.InfoWindow({
+        //     content: stringKoscielna
+        // });
+
+        // markerKoscielna.addListener("click", () => {
+        //    infoKoscielna.open({
+        //         anchor: marker,
+        //         map,
+        //         shouldFocus: false
+        //     });
+        // });
+
+        
+        // const poznanska = {lat:  52.41335837550068, lng: 16.90495204652914};
+        // const markerPoznanska = new google.maps.Marker({
+        //     position: poznanska,
+        //     map: map,
+        //     title: "Poznańska",
+        //     icon: svgMarker,
+          
+        // });
+
+        // const stringPoznanska = 'Poznańska';
+        //     const infoPoznanska = new google.maps.InfoWindow({
+        //     content: stringPoznanska
+        // });
+
+        // markerPoznanska.addListener("click", () => {
+        //     infoPoznanska.open({
+        //         anchor: marker,
+        //         map: map,
+        //         shouldFocus: false
+        //     });
+        // });
+       
+    }
+            </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtjInvBoOWbm2Ey31el6hao7mUhEFr3LY&callback=initMap"></script>
+
 </body>
 </html>
